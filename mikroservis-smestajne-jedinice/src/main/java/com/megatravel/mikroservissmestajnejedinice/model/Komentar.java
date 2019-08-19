@@ -16,7 +16,7 @@ public class Komentar {
     @Column(nullable = false, unique = false)
     private String tekst;
     @Column(nullable = false, unique = false)
-    private boolean odobrena;
+    private boolean odobren;
     @OneToOne
     private Rezervacija rezervacija;
 	
@@ -38,12 +38,12 @@ public class Komentar {
 		this.tekst = tekst;
 	}
 
-	public boolean isOdobrena() {
-		return odobrena;
+	public boolean isOdobren() {
+		return odobren;
 	}
 
-	public void setOdobrena(boolean odobrena) {
-		this.odobrena = odobrena;
+	public void setOdobren(boolean odobren) {
+		this.odobren = odobren;
 	}
 
 	public Rezervacija getRezervacija() {
