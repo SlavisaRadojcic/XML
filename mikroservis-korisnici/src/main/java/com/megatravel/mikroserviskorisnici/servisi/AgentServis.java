@@ -46,7 +46,7 @@ public class AgentServis {
 	
 	public Korisnik dodaj(KorisnikDTO korisnikDTO) {
 		Korisnik agent = new Korisnik();
-		if(mejlJeZauzet(korisnikDTO.getMejl())) {
+		if(!mejlJeZauzet(korisnikDTO.getMejl())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		} else {
 			agent.setIme(korisnikDTO.getIme());

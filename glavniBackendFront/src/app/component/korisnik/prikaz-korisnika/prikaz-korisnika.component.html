@@ -1,0 +1,43 @@
+
+<div class="row">
+    <div class="col-md-8 offset-sm-2" style="margin-top: 20px;">
+      <h3 style="color: lightblue">Korisnici</h3>
+      <div class="table-responsive">
+        <div class="bootstrap-table">
+          <div class="fixed-table-container">
+            <div class="fixed-table-body">
+              <table id="grid" class="table table-striped table-hover" data-toolbar="#toolbargrid" data-pagination="true" data-search="true">
+                <thead>
+                  <tr>
+                    <th class="text-left" style="color: lightblue">
+                      <div class="th-inner sortable">Email</div>
+                      <div class="fht-cell"></div>
+                    </th>
+                    <th class="text-left" style="color: lightblue">
+                      <div class="th-inner sortable">Name</div>
+                      <div class="fht-cell"></div>
+                    </th>
+                    <th class="text-left" style="color: lightblue">
+                      <div class="th-inner sortable">Last name</div>
+                      <div class="fht-cell"></div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = "let i = index; let user of users">
+                    <td class="text-left" style="background: lightblue"><a class="text-primary" >{{user.mejl}}</a></td>
+                    <td class="text-left" style="background: lightblue">{{user.ime}}</td>
+                    <td class="text-left" style="background: lightblue">{{user.prezime}}</td>
+                    <button *ngIf = "user.status == 'AKTIVAN' && user.id != loggedUser.id" class="btn btn-primary" (click)="changeStateOfUser(user, 'BLOKIRAN')">Block</button>
+                    <button  *ngIf = "user.status != 'AKTIVAN'" class="btn btn-primary" (click)="changeStateOfUser(user, 'BLOKIRAN')">Remove</button>
+                    <button *ngIf = "user.status != 'AKTIVAN'" class="btn btn-primary" (click)="changeStateOfUser(user, 'AKTIVAN')">Activate</button>
+                  </tr>
+                </tbody>
+                <tfoot></tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

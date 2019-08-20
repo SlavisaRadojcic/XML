@@ -21,7 +21,7 @@ public class RegistracijaServis {
 	
 	public Korisnik registruj(KorisnikDTO korisnikDTO) {
 		Korisnik korisnik = new Korisnik();
-		if(mejlJeZauzet(korisnikDTO.getMejl())) {
+		if(!mejlJeZauzet(korisnikDTO.getMejl())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		} else {
 			korisnik.setIme(korisnikDTO.getIme());
@@ -30,6 +30,7 @@ public class RegistracijaServis {
 			korisnik.setLozinka(korisnikDTO.getSifra());
 			korisnik.setStatus(StatusKorisnika.AKTIVAN);
 			korisnik.setTip(TipKorisnika.KORISNIK);
+			korisnikRepozitorijum.save(korisnik);
 			return korisnik;
 		}
 	}

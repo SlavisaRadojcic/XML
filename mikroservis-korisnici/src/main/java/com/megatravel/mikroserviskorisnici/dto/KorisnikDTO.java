@@ -25,6 +25,10 @@ public class KorisnikDTO {
 		this.status = korisnik.getStatus();
 		this.tip = korisnik.getTip();
 	}
+	
+	public KorisnikDTO() {
+		
+	}
 
 	public Long getId() {
 		return id;

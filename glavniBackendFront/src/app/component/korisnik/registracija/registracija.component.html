@@ -1,0 +1,42 @@
+
+<!-- REGISTRATION FORM -->
+<div class="text-center" style="padding:50px 0">
+	<div class="logo">Register</div>
+	<!-- Main Form -->
+	<div class="login-form-1">
+		<form id="register-form" class="text-left">
+			<div class="login-form-main-message"></div>
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="form-group">
+						<label for="reg_username" class="sr-only">Email address</label>
+						<input type="text" [(ngModel)]="user.mejl" class="form-control" id="reg_username" name="reg_username" placeholder="email">
+					</div>
+					<div class="form-group">
+						<label for="reg_password" class="sr-only">Password</label>
+						<input type="password" [(ngModel)]="user.sifra" class="form-control" id="reg_password" name="reg_password" placeholder="password">
+					</div>
+					
+					<div class="form-group">
+						<label for="reg_email" class="sr-only">Ime</label>
+						<input type="text" [(ngModel)]="user.ime" class="form-control" id="reg_email" name="reg_email" placeholder="ime">
+					</div>
+					<div class="form-group">
+						<label for="reg_fullname" class="sr-only">Prezime</label>
+						<input type="text" [(ngModel)]="user.prezime" class="form-control" id="reg_fullname" name="reg_fullname" placeholder="prezime">
+					</div>
+          <div *ngIf = "!postojiDugme" class="form-group">
+			<label for="number certificate" class="sr-only">Work certificate number</label>
+            <input type="text" minlength="3"  maxlength="30" #workNumber="ngModel" [(ngModel)]="user.poslovniMaticniBroj" name="workNumber" id="workNumber" class="form-control" placeholder="Work certificate number">
+          </div>
+					<div class="form-group login-group-checkbox">
+						<input type="checkbox" class="" id="reg_agree" name="reg_agree">
+						<label for="reg_agree">i agree with <a href="#">terms</a></label>
+					</div>
+				</div>
+				<button type="button" class="login-button" (click)="register()"><i class="fa fa-chevron-right"></i></button>
+			</div>
+		</form>
+	</div>
+	<!-- end:Main Form -->
+</div>
