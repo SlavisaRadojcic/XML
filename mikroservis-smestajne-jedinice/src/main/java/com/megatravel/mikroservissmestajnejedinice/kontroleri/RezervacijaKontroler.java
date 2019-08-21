@@ -64,4 +64,20 @@ public class RezervacijaKontroler {
 		return odgovor;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET,
+			value = "/{id}/korisnik")
+	public ResponseEntity<Long> nadjiKorisnikaRezervacije(@PathVariable("id") Long id) {
+		Long korisnik = this.rezervacijaServis.nadjiKorisnikaRezervacija(id);
+		ResponseEntity<Long> odgovor = new ResponseEntity<Long>(korisnik, HttpStatus.OK);
+		return odgovor ;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,
+			value = "/{id}/rezervacije-smestaja")
+	public ResponseEntity<List<Long>> nadjiDrugeRezervacije(@PathVariable("id") Long id) {
+		List<Long> korisnik = this.rezervacijaServis.nadjiDrugeRezervacije(id);
+		ResponseEntity<List<Long>> odgovor = new ResponseEntity<List<Long>>(korisnik, HttpStatus.OK);
+		return odgovor ;
+	}
+	
 }

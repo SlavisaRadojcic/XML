@@ -101,5 +101,29 @@ public class RezervacijaServis {
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}
+
+	public Long nadjiKorisnikaRezervacija(Long id) {
+		Optional<Rezervacija> rezervacija = rezervacijaRepozitorijum.findById(id);
+		if(rezervacija.isPresent()) {
+			Rezervacija rez = rezervacija.get();
+			if(rez.getKorisnik() != null) {
+				return rez.getKorisnik();
+			}
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
+
+	public List<Long> nadjiDrugeRezervacije(Long id) {
+		Optional<Rezervacija> rezervacija = rezervacijaRepozitorijum.findById(id);
+		if(rezervacija.isPresent()) {
+			Smestaj smestaj = rezervacija.get().getSmestaj();
+			List<Long> rezervacije = new ArrayList<Long>();
+			for(Rezervacija trenutna : smestaj.getRezervacije()) {
+				rezervacije.add(trenutna.getId());
+			}
+			return rezervacije;
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
 	
 }

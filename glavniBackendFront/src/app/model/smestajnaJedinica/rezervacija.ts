@@ -1,3 +1,5 @@
+import { SmestajnaJedinica } from "./smestajnaJedinica";
+
 export class Rezervacija{
     id: number;
     cena: number;
@@ -6,6 +8,7 @@ export class Rezervacija{
     ocena: number;
     pocetak: string;
     kraj: string;
+    smestaj: SmestajnaJedinica;
 
     constructor(){
         this.id = 0;
@@ -15,6 +18,7 @@ export class Rezervacija{
         this.ocena = 0;
         this.pocetak = "";
         this.kraj = "";
+        this.smestaj = new SmestajnaJedinica();
     }
 }
 

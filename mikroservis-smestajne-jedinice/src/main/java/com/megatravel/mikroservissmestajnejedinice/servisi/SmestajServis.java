@@ -3,13 +3,17 @@ package com.megatravel.mikroservissmestajnejedinice.servisi;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.mikroservissmestajnejedinice.dto.KriterijumiPretrageDTO;
 import com.megatravel.mikroservissmestajnejedinice.model.Rezervacija;
 import com.megatravel.mikroservissmestajnejedinice.model.Smestaj;
+import com.megatravel.mikroservissmestajnejedinice.repozitorijumi.RezervacijaRepozitorijum;
 import com.megatravel.mikroservissmestajnejedinice.repozitorijumi.SmestajRepozitorijum;
 
 @Component
@@ -17,6 +21,9 @@ public class SmestajServis {
 
 	@Autowired
 	private SmestajRepozitorijum smestajRepozitorijum;
+	
+	@Autowired
+	private RezervacijaRepozitorijum rezervacijaRepozitorijum;
 	
 	public List<Smestaj> nadjiSve(KriterijumiPretrageDTO kriterijumiPretrageDTO) {
 		List<Smestaj> smestaji = smestajRepozitorijum.findAll();
@@ -52,6 +59,18 @@ public class SmestajServis {
 				return false;
 		}
 		return true;
+	}
+
+	public Smestaj postaviOcenu(double ocena, Long rezervacijaId) {
+		Optional<Rezervacija> rezervacija = this.rezervacijaRepozitorijum.findById(rezervacijaId);
+		if(!rezervacija.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		} else {
+			Smestaj smestaj = rezervacija.get().getSmestaj();
+			smestaj.setOcena(ocena);
+			this.smestajRepozitorijum.save(smestaj);
+			return smestaj;
+		}
 	}
 	
 }

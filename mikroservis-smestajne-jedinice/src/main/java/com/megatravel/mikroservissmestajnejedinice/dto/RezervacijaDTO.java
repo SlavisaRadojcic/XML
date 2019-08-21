@@ -13,6 +13,11 @@ public class RezervacijaDTO {
     private Long ocena;
     private Date pocetak;
     private Date kraj;
+    private SmestajDTO smestaj;
+    
+    public RezervacijaDTO() {
+    	
+    }
 	
 	public RezervacijaDTO(Rezervacija rezervacija) {
 		this.id = rezervacija.getId();
@@ -22,6 +27,7 @@ public class RezervacijaDTO {
 		this.ocena = rezervacija.getOcena();
 		this.pocetak = rezervacija.getPocetak();
 		this.kraj = rezervacija.getKraj();
+		this.smestaj = new SmestajDTO(rezervacija.getSmestaj());
 	}
 
 	public Long getId() {

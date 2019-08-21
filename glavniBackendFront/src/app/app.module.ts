@@ -22,6 +22,8 @@ import { RegistracijaComponent } from './component/korisnik/registracija/registr
 import { AuthService } from './service/korisnik/auth.service';
 import { KorisnikService } from './service/korisnik/korisnik.service';
 import { PrikazKorisnikaComponent } from './component/korisnik/prikaz-korisnika/prikaz-korisnika.component';
+import { PrikazSmestajaComponent } from './component/smestaj/prikaz-smestaja/prikaz-smestaja.component';
+import { SmestajService } from './service/smestaj/smestaj.service';
 
 
 
@@ -33,6 +35,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },  
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'registracija/:id', component: RegistracijaComponent },
+  { path: 'smestajneJedinice', component: PrikazSmestajaComponent },
+  // { path: 'korisnici', component: PrikazKorisnikaComponent },
   { path: 'korisnici', component: PrikazKorisnikaComponent },
   { path: '', redirectTo: 'address', pathMatch: 'full' },
   
@@ -45,6 +49,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LoginComponent,
     RegistracijaComponent,
+    PrikazSmestajaComponent,
     PrikazKorisnikaComponent,
   ],
   imports: [
@@ -66,7 +71,9 @@ const appRoutes: Routes = [
   providers: [ //registrujem servise obaveznoo!!!!!!
     NgbActiveModal,
     AuthService,
+    DatePipe,
     KorisnikService,
+    SmestajService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HInterceptorService,
