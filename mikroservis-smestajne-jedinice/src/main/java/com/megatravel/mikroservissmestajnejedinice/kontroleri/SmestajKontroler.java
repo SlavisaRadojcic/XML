@@ -47,4 +47,12 @@ public class SmestajKontroler {
 		return odgovor ;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<SmestajDTO>> preuzmiSve() {
+		List<Smestaj> smestaji = smestajServis.nadjiSve();
+		List<SmestajDTO> pretvoreni = PretvaranjeDTO.pretvoriSmestaje(smestaji);
+		ResponseEntity<List<SmestajDTO>> odgovor = new ResponseEntity<List<SmestajDTO>>(pretvoreni, HttpStatus.OK);
+		return odgovor;
+	}
+	
 }

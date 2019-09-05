@@ -2,6 +2,7 @@ package com.megatravel.mikroservissmestajnejedinice.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.megatravel.mikroservissmestajnejedinice.model.Rezervacija;
 
 public class RezervacijaDTO {
@@ -11,7 +12,9 @@ public class RezervacijaDTO {
     private boolean realizovana;
 	private Long korisnik;
     private Long ocena;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date pocetak;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date kraj;
     private SmestajDTO smestaj;
     
@@ -27,7 +30,7 @@ public class RezervacijaDTO {
 		this.ocena = rezervacija.getOcena();
 		this.pocetak = rezervacija.getPocetak();
 		this.kraj = rezervacija.getKraj();
-		this.smestaj = new SmestajDTO(rezervacija.getSmestaj());
+		this.setSmestaj(new SmestajDTO(rezervacija.getSmestaj()));
 	}
 
 	public Long getId() {
@@ -84,6 +87,14 @@ public class RezervacijaDTO {
 
 	public void setKraj(Date kraj) {
 		this.kraj = kraj;
+	}
+
+	public SmestajDTO getSmestaj() {
+		return smestaj;
+	}
+
+	public void setSmestaj(SmestajDTO smestaj) {
+		this.smestaj = smestaj;
 	}
 
 }

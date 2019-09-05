@@ -7,6 +7,10 @@ public class KomentarDTO {
     private Long id;
     private String tekst;
     private boolean odobren;
+    
+    public KomentarDTO() {
+    	
+    }
 	
     public KomentarDTO(Komentar komentar) {
     	this.id = komentar.getId();

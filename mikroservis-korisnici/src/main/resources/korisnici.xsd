@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/mikroserviskorisnici/xml"
+	targetNamespace="http://www.megatravel.com/mikroserviskorisnici/xml"
+	elementFormDefault="qualified">
+	<xs:element name="preuzmiSveKorisnikeRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviKorisniciResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="korisnici" type="tns:KorisnikDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="KorisnikDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="ime" type="xs:string" />
+			<xs:element name="prezime" type="xs:string" />
+			<xs:element name="mejl" type="xs:string" />
+			<xs:element name="sifra" type="xs:string" />
+			<xs:element name="poslovniMaticniBroj" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="status" type="tns:StatusKorisnika" />
+			<xs:element name="tip" type="tns:TipKorisnika" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="StatusKorisnika">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AKTIVAN" />
+			<xs:enumeration value="BLOKIRAN" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipKorisnika">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KORISNIK" />
+			<xs:enumeration value="ADMINISTRATOR" />
+			<xs:enumeration value="AGENT" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="logovanjeAgentaRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mejl" type="xs:string" />
+				<xs:element name="sifra" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="logovanjeAgentaResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="uspesno" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

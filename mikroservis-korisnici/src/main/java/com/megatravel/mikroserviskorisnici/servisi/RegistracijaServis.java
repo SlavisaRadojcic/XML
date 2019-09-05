@@ -21,7 +21,7 @@ public class RegistracijaServis {
 	
 	public Korisnik registruj(KorisnikDTO korisnikDTO) {
 		Korisnik korisnik = new Korisnik();
-		if(!mejlJeZauzet(korisnikDTO.getMejl())) {
+		if(mejlJeZauzet(korisnikDTO.getMejl())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		} else {
 			korisnik.setIme(korisnikDTO.getIme());
@@ -30,6 +30,7 @@ public class RegistracijaServis {
 			korisnik.setLozinka(korisnikDTO.getSifra());
 			korisnik.setStatus(StatusKorisnika.AKTIVAN);
 			korisnik.setTip(TipKorisnika.KORISNIK);
+			korisnik.setPoslovniMaticniBroj(null);
 			korisnikRepozitorijum.save(korisnik);
 			return korisnik;
 		}
@@ -39,10 +40,10 @@ public class RegistracijaServis {
 		List<Korisnik> korisnici = korisnikRepozitorijum.findAll();
 		for(Korisnik korisnik : korisnici) {
 			if(korisnik.getMejl().equals(mejl)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 }

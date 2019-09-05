@@ -1,0 +1,69 @@
+
+<h1 class="register-heading">Dodaj Smestajnu Jedinicu</h1>
+<p></p>
+
+<form #formAddAccommodation="ngForm">
+  <div class="col-md-12">
+    <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)] = "accommodation.adresaDTO.zemlja" placeholder="zemlja" name = "country"  #country="ngModel" value="" required minlength="3" maxlength="20"/>
+    </div>
+    <small [hidden]="country.valid || (country.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      Country is required
+    </small>
+    
+    <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)] = "accommodation.adresaDTO.grad" placeholder="grad" value=""  name = "city"  #city="ngModel" value="" required minlength="3" maxlength="20" />
+    </div>
+    <small [hidden]="city.valid || (city.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      City is required
+      </small>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)] = "accommodation.adresaDTO.ulica" placeholder="ulica" name = "street"  #street="ngModel" value="" required minlength="3" maxlength="20"/>
+    </div>
+    <small [hidden]="street.valid || (street.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      Street is required
+    </small>
+    
+    <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)] = "accommodation.adresaDTO.broj" placeholder="broj" value=""  name = "number"  #number="ngModel" value="" required minlength="1" maxlength="4" />
+    </div>
+    <small [hidden]="number.valid || (number.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      Number is required
+      </small>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+        <textarea type="text" class="form-control" [(ngModel)] = "accommodation.opis" placeholder="opis" value="" name="description" #description="ngModel" maxlength="150"></textarea>
+    </div>
+    <small [hidden]="description.valid || (description.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      Description too long. Max length is 150 characters.  
+    </small>
+    <div class="form-group">
+        <input type="text" name="txtEmpPhone" [(ngModel)] = "accommodation.kapacitet" class="form-control" placeholder="kapacitet" value="" name="capacity" #capacity="ngModel" required maxlength="3" minlength="1"/>
+    </div>
+    <small [hidden]="capacity.valid || (capacity.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+      Capacity is required.  
+    </small>
+    <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)] = "accommodation.brojDanaZaOtkazivanje" placeholder="broj dana za oktazivanje" value="" name="cancellationDays"/>
+    </div>
+    <div class="form-group">
+      <input type="text"  name="txtEmpPhone" [(ngModel)] = "accommodation.cena" class="form-control" placeholder="cena" value="" name="price" #price="ngModel" required maxlength="9" minlength="1"/>
+    </div>
+    <small [hidden]="price.valid || (price.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
+    Price is required.  
+    </small>
+    <div class="form-group">
+        <ng-multiselect-dropdown  [placeholder]="'Tip'" [settings]="dropdownSettingsAccommodationType" [data]="accommodationTypeDropDown" [(ngModel)] = "selectedAccommodationType" [ngModelOptions]="{standalone: true}">
+        </ng-multiselect-dropdown>
+    </div>
+    <div class="form-group">
+        <ng-multiselect-dropdown  [placeholder]="'Dodatne Usluge'" [settings]="dropdownSettingsAdditionalServices" [data]="additionalServicesDropDown" [(ngModel)] = "selectAdditionalServices" [ngModelOptions]="{standalone: true}">
+        </ng-multiselect-dropdown>
+    </div>
+    <div>
+      <input type="submit" class="btn btn btn-success btn-lg" (click) = "save()" [disabled]="!formAddAccommodation.valid"  value="Dodaj smestajnu jedinicu"/>
+    </div>
+  </div>
+</form>
+

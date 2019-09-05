@@ -19,22 +19,10 @@ export class PrikazKorisnikaComponent implements OnInit {
 
   constructor(private authService: AuthService, private userService : KorisnikService, 
     private router: Router) {
-    // let res = localStorage.getItem('token');
-    // if(res == null){
-    //   this.router.navigate(['login']);
-    // }
-    // if(res != null){
-    //   this.loggedUser.mejl = this.authService.getUsername(res);
-    // }
   }
 
   ngOnInit() {
     
-    // this.userService.findByEmail(this.loggedUser.mejl).subscribe(
-    //   e => {
-    //     this.loggedUser = e;
-    //   }
-    // );
     this.userService.findAll().subscribe(
       s => {
         this.users = s

@@ -22,9 +22,9 @@ public class Rezervacija {
     private boolean realizovana;
     @OneToOne(mappedBy = "rezervacija")
     private Komentar komentar;
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
 	private Long korisnik;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private Long ocena;
     @ManyToOne
     private Smestaj smestaj;

@@ -1,23 +1,27 @@
+<app-meni-bar></app-meni-bar>
+
 <div class="justify-content-md-center">
   <form action="#" method="post" novalidate="novalidate" class="searchForm">
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <div class="col-lg-5 col-md-5 col-sm-12 p-2">
                   <div class="form-group">
                       <div class="input-group">
                           <input id="typeahead-basic" type="text" style="width: 100%;" placeholder="Drzava" [(ngModel)]="accommodationSearch.zemlja" [ngModelOptions]="{standalone: true}" required/>
                       </div>
                   </div>            
               </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <div class="col-lg-5 col-md-5 col-sm-12 p-2">
                 <div class="form-group">
                     <div class="input-group">
                             <input id="typeahead-basic" type="text" style="width: 100%;" placeholder="Grad" [(ngModel)]="accommodationSearch.grad" [ngModelOptions]="{standalone: true}" required/>
                     </div>
                 </div>            
             </div>
-                <div class="col-lg-2 col-md-3 col-sm-12 p-0">
+          </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12 p-2">
                   <div class="form-group">
                       <div class="input-group">
                           <input placeholder="Pocetni datum"
@@ -25,7 +29,7 @@
                       </div>
                   </div>            
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-12 p-0">
+                <div class="col-lg-5 col-md-5 col-sm-12 p-2">
                   <div class="form-group">
                       <div class="input-group">
                         <input placeholder="Krajnji datum"
@@ -33,13 +37,16 @@
                       </div>
                     </div>            
                 </div>
-                <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                  <input class="" type="text" name="numberOfPeople" style="width: 100%;" placeholder="Broj osoba" [(ngModel)] = "accommodationSearch.brojOsoba" maxlength="3" [ngModelOptions]="{standalone: true}" required>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-5 col-sm-12 p-2">
+                  <input class="" type="text" name="numberOfPeople" style="width: 100%;" placeholder="Broj ljudi" [(ngModel)] = "accommodationSearch.brojLjudi" maxlength="3" [ngModelOptions]="{standalone: true}" required>
                 </div>
-                <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                  <button type="button" class="btn btn-primary" (click) = "searchAccommodations()">Search</button>
+                <div class="col-lg-4 col-md-5 col-sm-12 p-2">
+                  <button type="button" class="btn btnClass" (click) = "searchAccommodations()">Trazi</button>
               </div>
             </div>
+            
         </div>
     </div>
   </form>
@@ -57,7 +64,7 @@
             <h4 class="col-lg-1">{{vratiTrenutnuCenu(accommodation)}}</h4>
           </div>
           <div class="col-lg-12" style="text-align: end;">
-              <button class="btn btn-primary" (click) = "book(accommodation)" >Book</button>
+              <button class="btn btnClass" (click) = "book(accommodation)" >Rezervisi</button>
           </div>
       </a>
     </div>

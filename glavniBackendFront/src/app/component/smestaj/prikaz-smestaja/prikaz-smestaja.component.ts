@@ -20,7 +20,6 @@ import { SmestajService } from 'app/service/smestaj/smestaj.service';
 })
 export class PrikazSmestajaComponent implements OnInit {
 
-  p: number;
   accommodationSearch: KriterijumiPretrage = new KriterijumiPretrage();
   beginDate: NgbDate;
   endDate: NgbDate;
@@ -35,59 +34,31 @@ export class PrikazSmestajaComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, public datepipe: DatePipe, 
           public authService: AuthService, public userService: KorisnikService, private smestajService: SmestajService) { 
-    // let res = localStorage.getItem('token');
-    // if(res != null){
-    //   this.loggedUser.mejl = this.authService.getUsername(res);
-    // }
-    // else {
-    //   this.loggedUser.mejl = ""
-    // }
+    this.loggedUser = JSON.parse(localStorage.getItem('token'));
   }
 
   ngOnInit() {
-
-    if(this.loggedUser.mejl != ""){
-      this.userService.findByEmail(this.loggedUser.mejl).subscribe(
-        e => {
-          this.loggedUser = e;
-        }
-      );
-    }
-
-    // let smestaj = new SmestajnaJedinica()
-
-    // let adresa = new Adresa;
-    // adresa.grad = "Beograd"
-    // adresa.zemlja = "Srbija"
-
-    // smestaj.adresaDTO = adresa;
-    // smestaj.cena = 150;
-    // smestaj.ocena = 4;
-    // let tip = new TipSmestaja();
-    // tip.naziv = "Hotel"
-    // smestaj.tipDTO = tip;
-    // smestaj.opis = "Najbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja sobaNajbolja soba"
-
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-    // this.accommodationToShow.push(smestaj);
-
+    this.smestajService.getAll().subscribe(
+      s => {
+        this.accommodationToShow = s;
+      }
+    )
   }
 
   searchAccommodations(){
     this.accommodationSearch.pocetak = this.toModel(this.beginDate);
     this.accommodationSearch.kraj = this.toModel(this.endDate);
 
-    this.smestajService.search(this.accommodationSearch).subscribe(
-      s => this.accommodationToShow = s
-    )
+    if(this.accommodationSearch.pocetak != null && this.accommodationSearch.kraj != null){
+      this.smestajService.search(this.accommodationSearch).subscribe(
+        s => this.accommodationToShow = s
+      )
+    }
+    else{
+      alert('nisu uneseni kriterijumi za pretragu!')
+    }
+
+    
   }
 
   book(accommodation: SmestajnaJedinica){
@@ -95,6 +66,7 @@ export class PrikazSmestajaComponent implements OnInit {
     reservation.pocetak = this.accommodationSearch.pocetak;
     reservation.kraj = this.accommodationSearch.kraj;
     reservation.smestaj = accommodation;
+    reservation.korisnik = this.loggedUser.id;
 
     this.smestajService.book(reservation, this.loggedUser.id).subscribe(
       s => {

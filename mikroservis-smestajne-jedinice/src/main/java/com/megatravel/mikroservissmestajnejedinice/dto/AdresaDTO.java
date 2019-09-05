@@ -10,6 +10,10 @@ public class AdresaDTO {
 	private String ulica;
 	private int broj;
 	
+	public AdresaDTO() {
+		
+	}
+	
 	public AdresaDTO(Adresa adresa) {
 		this.id = adresa.getId();
 		this.zemlja = adresa.getZemlja();

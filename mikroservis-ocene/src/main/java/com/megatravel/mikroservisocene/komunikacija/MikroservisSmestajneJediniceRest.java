@@ -29,4 +29,9 @@ public interface MikroservisSmestajneJediniceRest {
 	public ResponseEntity<?> postaviOcenu(@RequestParam("ocena") double ocena,
 			@PathVariable("id") Long rezervacijaId);
 	
+	@RequestMapping(method = RequestMethod.GET,
+			value = "api/rezervacije/{id}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> rezervacijeJeRealizovana(@PathVariable("id") Long id);
+	
 }

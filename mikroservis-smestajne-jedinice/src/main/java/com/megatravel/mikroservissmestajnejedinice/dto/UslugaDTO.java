@@ -8,6 +8,10 @@ public class UslugaDTO {
     private String naziv;
     private String opis;
 	
+    public UslugaDTO() {
+    	
+    }
+    
     public UslugaDTO(Usluga usluga) {
     	this.id = usluga.getId();
     	this.naziv = usluga.getNaziv();

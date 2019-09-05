@@ -80,4 +80,12 @@ public class RezervacijaKontroler {
 		return odgovor ;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET,
+			value = "/{id}")
+	public ResponseEntity<Boolean> rezervacijeJeRealizovana(@PathVariable("id") Long id) {
+		Boolean realizovana = this.rezervacijaServis.rezervacijaJeRealizovana(id);
+		ResponseEntity<Boolean> odgovor = new ResponseEntity<Boolean>(realizovana, HttpStatus.OK);
+		return odgovor;
+	}
+	
 }

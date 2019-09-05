@@ -13,34 +13,14 @@ export class AuthService {
 
   constructor(private http: HttpClient,
     private router: Router) { }
-
-    getRoles(token: string) {
-      let jwtData = token.split('.')[1];
-      let decodedJwtJsonData = window.atob(jwtData);
-      let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      //console.log(decodedJwtData);
-      //console.log(decodedJwtData.auth[0].authority);
-      //console.log(decodedJwtData.sub); //username
-      return decodedJwtData.auth[0].authority; //you can access role or username
-    }
   
-    getUsername(token: string) : string{
-      let jwtData = token.split('.')[1];
-      let decodedJwtJsonData = window.atob(jwtData);
-      let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      //console.log(decodedJwtData);
-      //console.log(decodedJwtData.auth[0].authority);
-      //console.log(decodedJwtData.sub); //username
-      return decodedJwtData.sub; //you can access role or username
-    }
-  
-    login(mejl:string, lozinka:string): Observable<string>{
+    login(mejl:string, lozinka:string): Observable<Korisnik>{
       let login: Login = new Login();
       login.mejl = mejl;
       login.sifra = lozinka;
       const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
       return this.http
-        .post<string>(this.baseUrl + '/uloguj', login);
+        .post<Korisnik>(this.baseUrl + '/uloguj', login);
     }
 
     signup(registration: Korisnik): Observable<{}>{
@@ -59,10 +39,7 @@ export class AuthService {
     }
 
     logout(): void {
-      // localStorage.removeItem('token');
-      // localStorage.removeItem('reservation');
-      // localStorage.removeItem('beginDate');
-      // localStorage.removeItem('endDate');
+      localStorage.removeItem('token');
       this.router.navigate(['login']);
     }
 

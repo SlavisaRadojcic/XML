@@ -18,43 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('token') != null){
-    //  this.loggedUser.mejl = this.authService.getUsername(localStorage.getItem('token'));
-      // let isAdmin = false;
-      // this.userService.findByEmail(this.loggedUser.email).subscribe(
-      //   s=>{
-      //     this.loggedUser = s;          
-      //     this.loggedUser.role.forEach(element =>
-      //       {
-
-              
-      //       if(element.roleName == "ROLE_ADMIN"){
-      //         isAdmin = true;
-      //           }
-      //         }
-      //       )
-      //       if(!isAdmin){
-      //         if(localStorage.getItem('reservation') != null){
-      //           let acc : AccommodationReservation = JSON.parse(localStorage.getItem('reservation'))
-
-      //           if(acc.roomDTO.id != null && acc.roomDTO.id != undefined){
-      //             this.router.navigate(['bookAccommodation/' + acc.roomDTO.id]);
-      //           }
-      //           else{
-      //             this.router.navigate(['address']);
-      //           }
-      //         }
-      //         else{
-      //           this.router.navigate(['address']);
-      //         }
-      //       }
-      //       else{
-      //         this.router.navigate(['users']);
-      //       }
-      //   }
-      // )
-
-    }
   }
 
   login(){
@@ -64,27 +27,16 @@ export class LoginComponent implements OnInit {
         res => 
         {
           console.log(res);
-          //alert("evo ga")
-          localStorage.setItem('token', res);
-         // this.router.navigate(['address']); //odkomentarisi
-         alert("u redu")
+          this.loggedUser = res;
+          localStorage.setItem('token', JSON.stringify(res));
 
-
-          //let role = this.auth.getRoles(res);
-
+          if(this.loggedUser.tip == "KORISNIK"){
+            this.router.navigate(['smestajneJedinice']);
+          }
+          else{ //znaci admin je u pitanju
+            this.router.navigate(['korisnici']);
+          }
           
-          // //samo da bi postavio ulogo naog korisnika
-          // this.userService.findByEmail(this.user.email).subscribe(
-          //   s => {
-          //     this.loggedUser = s;
-          //     window.location.reload();
-              
-          //   },
-          //   err =>{
-          //     console.log("err za pronalazenje po mailu");
-          //   } 
-          // );
-
         },
         err => {
           alert("Wrong email or password");

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class Smestaj {
     private Adresa adresa;
     @ManyToOne
     private TipSmestaja tip;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "smestaj_usluga", 
     		   joinColumns = @JoinColumn(name = "smestaj_id"), 
     		   inverseJoinColumns = @JoinColumn(name = "usluga_id"))

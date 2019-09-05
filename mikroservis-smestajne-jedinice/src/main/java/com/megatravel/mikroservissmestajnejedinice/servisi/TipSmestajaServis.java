@@ -43,6 +43,7 @@ public class TipSmestajaServis {
 		Optional<TipSmestaja> tip = tipSmestajaRepozitorijum.findById(id);
 		if(tip.isPresent() && tip.get().getSmestaji().isEmpty()) {
 			tipSmestajaRepozitorijum.delete(tip.get());
+			return;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}

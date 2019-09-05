@@ -22,6 +22,7 @@ public class Korisnik {
 	private String ime;
 	@Column(length = 64, nullable = false, unique = false)
 	private String prezime;
+	@Column(length = 64, nullable = true, unique = true)
 	private String poslovniMaticniBroj;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = false)

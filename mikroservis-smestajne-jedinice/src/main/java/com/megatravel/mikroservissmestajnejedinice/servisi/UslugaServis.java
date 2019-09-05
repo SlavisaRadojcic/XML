@@ -45,6 +45,7 @@ public class UslugaServis {
 		Optional<Usluga> usluga = uslugaRepozitorijum.findById(id);
 		if(usluga.isPresent() && usluga.get().getSmestaji().isEmpty()) {
 			uslugaRepozitorijum.delete(usluga.get());
+			return;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}

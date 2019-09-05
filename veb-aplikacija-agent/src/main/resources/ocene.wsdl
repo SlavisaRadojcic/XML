@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.megatravel.com/mikroservisocene/xml" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.megatravel.com/mikroservisocene/xml" targetNamespace="http://www.megatravel.com/mikroservisocene/xml">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.megatravel.com/mikroservisocene/xml">
+            <xs:element name="sveOceneRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sveOceneResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="ocene" type="tns:OcenaDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="OcenaDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="vrednost" type="xs:int"/>
+                    <xs:element name="rezervacija" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="sveOceneRequest">
+        <wsdl:part element="tns:sveOceneRequest" name="sveOceneRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="sveOceneResponse">
+        <wsdl:part element="tns:sveOceneResponse" name="sveOceneResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PortZaOcene">
+        <wsdl:operation name="sveOcene">
+            <wsdl:input message="tns:sveOceneRequest" name="sveOceneRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:sveOceneResponse" name="sveOceneResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PortZaOceneSoap11" type="tns:PortZaOcene">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="sveOcene">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="sveOceneRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="sveOceneResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PortZaOceneService">
+        <wsdl:port binding="tns:PortZaOceneSoap11" name="PortZaOceneSoap11">
+            <soap:address location="http://localhost:9999/mikroservis-ocene/servisi"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

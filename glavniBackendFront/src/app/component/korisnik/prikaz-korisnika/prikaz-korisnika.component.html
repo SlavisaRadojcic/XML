@@ -1,4 +1,6 @@
 
+<app-meni-bar></app-meni-bar>
+
 <div class="row">
     <div class="col-md-8 offset-sm-2" style="margin-top: 20px;">
       <h3 style="color: lightblue">Korisnici</h3>
@@ -10,15 +12,15 @@
                 <thead>
                   <tr>
                     <th class="text-left" style="color: lightblue">
-                      <div class="th-inner sortable">Email</div>
+                      <div class="th-inner sortable">Mail</div>
                       <div class="fht-cell"></div>
                     </th>
                     <th class="text-left" style="color: lightblue">
-                      <div class="th-inner sortable">Name</div>
+                      <div class="th-inner sortable">Ime</div>
                       <div class="fht-cell"></div>
                     </th>
                     <th class="text-left" style="color: lightblue">
-                      <div class="th-inner sortable">Last name</div>
+                      <div class="th-inner sortable">Prezime</div>
                       <div class="fht-cell"></div>
                     </th>
                   </tr>
@@ -28,9 +30,8 @@
                     <td class="text-left" style="background: lightblue"><a class="text-primary" >{{user.mejl}}</a></td>
                     <td class="text-left" style="background: lightblue">{{user.ime}}</td>
                     <td class="text-left" style="background: lightblue">{{user.prezime}}</td>
-                    <button *ngIf = "user.status == 'AKTIVAN' && user.id != loggedUser.id" class="btn btn-primary" (click)="changeStateOfUser(user, 'BLOKIRAN')">Block</button>
-                    <button  *ngIf = "user.status != 'AKTIVAN'" class="btn btn-primary" (click)="changeStateOfUser(user, 'BLOKIRAN')">Remove</button>
-                    <button *ngIf = "user.status != 'AKTIVAN'" class="btn btn-primary" (click)="changeStateOfUser(user, 'AKTIVAN')">Activate</button>
+                    <button *ngIf = "user.status == 'AKTIVAN' && user.id != loggedUser.id" class="btn btnClass" (click)="changeStateOfUser(user, 'BLOKIRAN')">Blokiraj</button>
+                    <button *ngIf = "user.status != 'AKTIVAN'" class="btn btnClass" (click)="changeStateOfUser(user, 'AKTIVAN')">Aktiviraj</button>
                   </tr>
                 </tbody>
                 <tfoot></tfoot>

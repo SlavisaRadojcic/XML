@@ -24,23 +24,30 @@ import { KorisnikService } from './service/korisnik/korisnik.service';
 import { PrikazKorisnikaComponent } from './component/korisnik/prikaz-korisnika/prikaz-korisnika.component';
 import { PrikazSmestajaComponent } from './component/smestaj/prikaz-smestaja/prikaz-smestaja.component';
 import { SmestajService } from './service/smestaj/smestaj.service';
+import { PrikazRezervacijaComponent } from './component/smestaj/prikaz-rezervacija/prikaz-rezervacija.component';
+import { PrikazUslugaComponent } from './component/smestaj/prikaz-usluga/prikaz-usluga.component';
+import { PrikazTipaSmestajaComponent } from './component/smestaj/prikaz-tipa-smestaja/prikaz-tipa-smestaja.component';
+import { OceniRezervacijuComponent } from './component/korisnik/oceni-rezervaciju/oceni-rezervaciju.component';
+import { MeniBarComponent } from './component/meni-bar/meni-bar.component';
+import { PrikazKomentaraComponent } from './component/korisnik/prikaz-komentara/prikaz-komentara.component';
+import { KomentarService } from './service/smestaj/komentar.service';
 
 
 
 const appRoutes: Routes = [
-  /*{ path: 'record/:id', component: RecordDetailsComponent },
-  { path: 'main', component: MainComponent },  
-  { path: '', redirectTo: 'main', pathMatch: 'full' },*/
 
   { path: 'login', component: LoginComponent },  
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'registracija/:id', component: RegistracijaComponent },
   { path: 'smestajneJedinice', component: PrikazSmestajaComponent },
-  // { path: 'korisnici', component: PrikazKorisnikaComponent },
+  { path: 'myReservation', component: PrikazRezervacijaComponent },
   { path: 'korisnici', component: PrikazKorisnikaComponent },
-  { path: '', redirectTo: 'address', pathMatch: 'full' },
+  { path: 'usluge', component: PrikazUslugaComponent },
+  { path: 'oceni', component: OceniRezervacijuComponent },
+  { path: 'tipSmestaja', component: PrikazTipaSmestajaComponent },
+  { path: 'komentari', component: PrikazKomentaraComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   
-  //{ path: '**', component: ViewAccommodationComponent }
 ];
 
 @NgModule({
@@ -51,6 +58,12 @@ const appRoutes: Routes = [
     RegistracijaComponent,
     PrikazSmestajaComponent,
     PrikazKorisnikaComponent,
+    PrikazRezervacijaComponent,
+    PrikazUslugaComponent,
+    PrikazTipaSmestajaComponent,
+    OceniRezervacijuComponent,
+    MeniBarComponent,
+    PrikazKomentaraComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,15 +78,16 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true, useHash: true } // <-- debugging purposes only
+      { enableTracing: true, useHash: true } 
     )
   ],
-  providers: [ //registrujem servise obaveznoo!!!!!!
+  providers: [ 
     NgbActiveModal,
     AuthService,
     DatePipe,
     KorisnikService,
     SmestajService,
+    KomentarService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HInterceptorService,

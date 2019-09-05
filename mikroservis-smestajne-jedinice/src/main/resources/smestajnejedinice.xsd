@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/mikroservissmestajnejedinice/xml"
+	targetNamespace="http://www.megatravel.com/mikroservissmestajnejedinice/xml"
+	elementFormDefault="qualified">
+	<xs:element name="sveAdreseRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveAdreseResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="adrese" type="tns:AdresaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviTipoviRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviTipoviResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="tipovi" type="tns:TipSmestajaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveUslugeRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveUslugeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="usluge" type="tns:UslugaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviSmestajiRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviSmestajiResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="smestaji" type="tns:SmestajDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveRezervacijeRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveRezervacijeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="rezervacije" type="tns:RezervacijaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviKomentariRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sviKomentariResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="komentari" type="tns:KomentarDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dodavanjeSmestajneJediniceRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="smestaj" type="tns:SmestajDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dodavanjeSmestajneJediniceResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="uspesno" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dodavanjeRezervacijeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="rezervacija" type="tns:RezervacijaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dodavanjeRezervacijeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="uspesno" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="potvrdaRezervacijeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="rezervacija" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="potvrdaRezervacijeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="uspesno" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AdresaDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="zemlja" type="xs:string" />
+			<xs:element name="grad" type="xs:string" />
+			<xs:element name="ulica" type="xs:string" />
+			<xs:element name="broj" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TipSmestajaDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="naziv" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UslugaDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="naziv" type="xs:string" />
+			<xs:element name="opis" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SmestajDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="opis" type="xs:string" />
+			<xs:element name="kapacitet" type="xs:int" />
+			<xs:element name="cena" type="xs:double" />
+			<xs:element name="dozvoljenoOtkazivanje" type="xs:boolean" />
+			<xs:element name="brojDanaZaOtkazivanje" type="xs:int" />
+			<xs:element name="ocena" type="xs:double" />
+			<xs:element name="agent" type="xs:long" />
+			<xs:element name="adresaDTO" type="tns:AdresaDTO" />
+			<xs:element name="tipDTO" type="tns:TipSmestajaDTO" />
+			<xs:element name="uslugeDTO" type="tns:UslugaDTO" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RezervacijaDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="cena" type="xs:double" />
+			<xs:element name="realizovana" type="xs:boolean" />
+			<xs:element name="korisnik" type="xs:long" />
+			<xs:element name="ocena" type="xs:long" />
+			<xs:element name="smestaj" type="xs:long" />
+			<xs:element name="pocetak" type="xs:date" />
+			<xs:element name="kraj" type="xs:date" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KomentarDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="tekst" type="xs:string" />
+			<xs:element name="odobren" type="xs:boolean" />
+			<xs:element name="rezervacija" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

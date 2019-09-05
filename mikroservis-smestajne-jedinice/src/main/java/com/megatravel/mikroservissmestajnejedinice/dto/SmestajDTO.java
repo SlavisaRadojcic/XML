@@ -15,6 +15,10 @@ public class SmestajDTO {
     private AdresaDTO adresaDTO;
     private TipSmestajaDTO tipDTO;
 	
+    public SmestajDTO() { 
+    	
+    }
+    
 	public SmestajDTO(Smestaj smestaj) {
 		this.id = smestaj.getId();
 		this.opis = smestaj.getOpis();

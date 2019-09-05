@@ -7,6 +7,10 @@ public class TipSmestajaDTO {
     private Long id;
 	private String naziv;
 	
+	public TipSmestajaDTO() {
+		
+	}
+	
 	public TipSmestajaDTO(TipSmestaja tip) {
 		this.id = tip.getId();
 		this.naziv = tip.getNaziv();

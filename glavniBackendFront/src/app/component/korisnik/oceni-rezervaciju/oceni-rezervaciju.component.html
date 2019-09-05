@@ -1,0 +1,19 @@
+<app-meni-bar></app-meni-bar>
+
+<div class="container">
+  <a class="list-group-item col-md-12">
+    <div style="display: inline-flex; width: 100%;">
+      <h4 class="col-lg-10">{{rezervacija.smestaj.adresaDTO.zemlja}}</h4>
+      <h3 class="col-md-1" style="max-width: 25%">{{rezervacija.smestaj.ocena}}</h3>       
+    </div>
+    <label class="col-lg-12">{{rezervacija.pocetak}}</label>
+    <label class="col-lg-12">{{rezervacija.kraj}}</label>
+    <label class="col-lg-12">{{rezervacija.smestaj.opis}}</label>
+    <div style="width: 100%; display: inline-flex;">
+      <h4 class="col-lg-10">{{rezervacija.smestaj.tipDTO.naziv}}</h4>
+      <h4 class="col-lg-1">{{vratiTrenutnuCenu(rezervacija.smestaj)}}</h4>
+    </div>
+    <input class="form-control" type="text" placeholder="Komentar" [(ngModel)] = "komentar.tekst">
+    <button class="btn btnClass" (click) = "posaljiKomentar()" >Posalji</button>
+  </a>
+</div>

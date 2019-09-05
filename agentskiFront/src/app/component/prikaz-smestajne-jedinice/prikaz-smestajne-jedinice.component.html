@@ -1,0 +1,52 @@
+<div class="justify-content-md-center">
+  <form action="#" method="post" novalidate="novalidate" class="searchForm">
+    <div class="row">
+        <div style="margin-left: auto; margin-right: auto;" class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                  <div class="form-group">
+                      <div class="input-group">
+                          <input placeholder="Pocetni datum"
+                                  name="dp1" [(ngModel)]="beginDate" style="width: 100%;" [minDate] = "minDate" [maxDate] = "maxDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" [ngModelOptions]="{standalone: true}" required>
+                      </div>
+                  </div>            
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                  <div class="form-group">
+                      <div class="input-group">
+                        <input placeholder="Krajnji datum"
+                              name="dp2" [(ngModel)]="endDate" style="width: 100%;" [minDate] = "minDate" [maxDate] = "maxDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" [ngModelOptions]="{standalone: true}" required>
+                      </div>
+                    </div>            
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-12 p-0">
+                  <button type="button" class="btn btn-primary" (click) = "book()">Book</button>
+              </div>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <div class="row">
+    <a class="list-group-item col-md-4" style="padding: 10px;" *ngFor = "let i = index; let accommodation of accommodationToShow | paginate: { itemsPerPage: 10, currentPage: p }">
+        <div style="display: inline-flex; width: 100%;">
+            <h4 class="col-lg-10">{{accommodation.smestaj.adresaDTO.zemlja}}</h4>
+            <h3 class="col-md-1" style="max-width: 25%" (click) = "orderByType('RATING')">{{accommodation.smestaj.ocena}}</h3>       
+        </div>
+        <div style="display: inline-flex; width: 100%;">
+          <label class="col-lg-12">{{accommodation.pocetak}}</label>
+        </div>
+        <label class="col-lg-12">{{accommodation.kraj}}</label>
+        <label class="col-lg-12">{{accommodation.smestaj.opis}}</label>
+        <div style="width: 100%; display: inline-flex;">
+          <h4 class="col-lg-10">{{accommodation.smestaj.tipDTO.naziv}}</h4>
+          <h4 class="col-lg-1">{{vratiTrenutnuCenu(accommodation.smestaj)}}</h4>
+        </div>
+        <div class="col-lg-12" style="text-align: end;">
+            <button class="btn btn-primary" (click) = "realizovana(accommodation)" >Realizovana</button>
+        </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: rgb(38, 137, 224) !important">
+  <a style="color: aliceblue;cursor: pointer;" (click) = "goToHome()" class="navbar-brand">Megatravel</a>
+  <button class="navbar-toggler" data-target="#navigation" data-control="navigation" data-toggle="collapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navigation" style="width: 95%;">
+    <ul class="nav navbar-nav">	
+      <li *ngIf="loggedIn && !isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/myReservation']">Moje rezervacije</a>
+      </li>
+      <li *ngIf="!isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/smestajneJedinice']">Smestaj</a>
+      </li>
+      <li *ngIf="loggedIn && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/usluge']">Prikaz usluga</a>
+      </li>
+      <li *ngIf="loggedIn && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/tipSmestaja']">Prikaz tipova smestaja</a>
+      </li>
+      <li *ngIf="loggedIn && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/komentari']">Vidi komentare</a>
+      </li>
+      <!--   -->
+      <li *ngIf="loggedIn && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/registracija/0']">Registruj agenta</a>
+      </li>
+      <!--  -->
+      <li *ngIf="loggedIn && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/korisnici']">Prikaz Korisnika</a>
+      </li>				
+      <li *ngIf="!loggedIn" class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']">Uloguj se</a>
+      </li>
+      <li *ngIf="!loggedIn" class="nav-item">
+        <a class="nav-link" [routerLink]="['/registracija']">Registruj se</a>
+      </li>
+    </ul>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse" style="width: 5%;">
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="loggedIn" class="nav-item" >
+        <a class="nav-link" (click) = "logOut()">Izloguj se</a></li>
+    </ul>
+  </div>
+</nav>

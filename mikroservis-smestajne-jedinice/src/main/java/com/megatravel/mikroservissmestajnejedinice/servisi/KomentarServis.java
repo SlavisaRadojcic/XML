@@ -35,7 +35,7 @@ public class KomentarServis {
 
 	public Komentar ostaviKomentarNaRezervaciju(Long id, KomentarDTO komentarDTO) {
 		Optional<Rezervacija> rezervacija = rezervacijaRepozitorijum.findById(id);
-		if(rezervacija.isPresent() && rezervacija.get().getKomentar() == null) {
+		if(rezervacija.isPresent() && rezervacija.get().getKomentar() == null && rezervacija.get().isRealizovana()) {
 			Komentar komentar = new Komentar();
 			komentar.setOdobren(false);
 			komentar.setRezervacija(rezervacija.get());

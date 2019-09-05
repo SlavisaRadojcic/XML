@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/mikroservisocene/xml"
+	targetNamespace="http://www.megatravel.com/mikroservisocene/xml"
+	elementFormDefault="qualified">
+	<xs:element name="sveOceneRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sveOceneResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="ocene" type="tns:OcenaDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="OcenaDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="vrednost" type="xs:int" />
+			<xs:element name="rezervacija" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

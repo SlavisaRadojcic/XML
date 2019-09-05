@@ -8,7 +8,7 @@ export class KriterijumiPretrage{
     constructor(){
         this.zemlja = "";
         this.grad = "";
-        this.brojLjudi = 0;
+        this.brojLjudi = undefined;
         this.pocetak = "";
         this.kraj = "";
     }

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -77,6 +79,8 @@ public class RezervacijaServis {
 				rezervacija.setOcena(null);
 				long brojDana = (rezervacijaDTO.getKraj().getTime() - rezervacija.getPocetak().getTime()) / 86400000;
 				rezervacija.setCena(nadjeni.get().getCena() * brojDana);
+				rezervacijaRepozitorijum.save(rezervacija);
+				return rezervacija;
 			}
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
@@ -91,7 +95,8 @@ public class RezervacijaServis {
 				Date vreme = new Date();
 				long brojDana = (rezervacija.get().getPocetak().getTime() - vreme.getTime()) / 86400000;
 				if(brojDana >= smestaj.getBrojDanaZaOtkazivanje()) {
-					rezervacijaRepozitorijum.deleteById(id);
+					rezervacijaRepozitorijum.delete(rezervacija.get());
+					return;
 				} else {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 				}
@@ -124,6 +129,54 @@ public class RezervacijaServis {
 			return rezervacije;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
+
+	public Boolean rezervacijaJeRealizovana(Long id) {
+		Optional<Rezervacija> rezervacija = rezervacijaRepozitorijum.findById(id);
+		if(rezervacija.isPresent()) {
+			return rezervacija.get().isRealizovana();
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
+	
+	@Transactional
+	public Rezervacija kreiraj(com.megatravel.mikroservissmestajnejedinice.xml.RezervacijaDTO rezervacijaDTO, Long smestaj) {
+		Optional<Smestaj> nadjeni = smestajRepozitorijum.findById(smestaj);
+		if(nadjeni.isPresent()) {
+			
+			if(smestajServis.smestajSlobodan(nadjeni.get(), rezervacijaDTO.getPocetak().toGregorianCalendar().getTime(), rezervacijaDTO.getKraj().toGregorianCalendar().getTime())) {
+				Rezervacija rezervacija = new Rezervacija();
+				rezervacija.setSmestaj(nadjeni.get());
+				rezervacija.setPocetak(rezervacijaDTO.getPocetak().toGregorianCalendar().getTime());
+				rezervacija.setKraj(rezervacijaDTO.getKraj().toGregorianCalendar().getTime());
+				rezervacija.setRealizovana(false);
+				rezervacija.setKomentar(null);
+				rezervacija.setOcena(null);
+				long brojDana = (rezervacija.getKraj().getTime() - rezervacija.getPocetak().getTime()) / 86400000 + 1;
+				rezervacija.setCena(nadjeni.get().getCena() * brojDana);
+				rezervacijaRepozitorijum.save(rezervacija);
+				return rezervacija;
+			}
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
+	
+	public Rezervacija realizujRezervaciju(Long rezervacijaId) {
+		Optional<Rezervacija> rezervacija = rezervacijaRepozitorijum.findById(rezervacijaId);
+		if(!rezervacija.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		} else {
+			Rezervacija rez = rezervacija.get();
+			Date poslednjiDan = rez.getKraj();
+			Date danasnjiDan = new Date();
+			if(danasnjiDan.before(poslednjiDan)) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+			}
+			rez.setRealizovana(true);
+			rezervacijaRepozitorijum.save(rez);
+			return rez;
+		}
 	}
 	
 }
